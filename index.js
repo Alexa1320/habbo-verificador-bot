@@ -27,3 +27,27 @@ client.once(Events.ClientReady, () => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
+client.on(Events.InteractionCreate, async (interaction) => {
+
+    if (interaction.isChatInputCommand()) {
+
+        if (interaction.commandName === "panel") {
+
+            const boton = new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId("verificar")
+                    .setLabel("✅ Verificarme")
+                    .setStyle(ButtonStyle.Success)
+            );
+
+            await interaction.reply({
+                content: "Pulsa el botón para comenzar tu verificación de Habbo.",
+                components: [boton]
+            });
+
+        }
+
+    }
+
+});
