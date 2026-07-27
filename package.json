@@ -1,15 +1,15 @@
 {
-  "name": "bmt-security",
+  "name": "ejercito-bmt-bot",
   "version": "1.0.0",
-  "description": "Bot de verificación para EJÉRCITO BMT",
+  "description": "Bot de verificación para el servidor EJÉRCITO BMT",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "discord.js": "^14.16.3",
-    "dotenv": "^16.4.7",
-    "axios": "^1.7.9",
-    "sqlite3": "^5.1.7"
+    "discord.js": "^14.21.0",
+    "dotenv": "^16.6.1",
+    "axios": "^1.11.0",
+    "express": "^5.1.0"
   }
 }
