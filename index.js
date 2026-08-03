@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 
 const {
@@ -13,8 +12,6 @@ const {
   TextInputStyle
 } = require("discord.js");
 
-const axios = require("axios");
-
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -26,28 +23,54 @@ client.once(Events.ClientReady, () => {
   console.log(`✅ Bot conectado como ${client.user.tag}`);
 });
 
-client.login(process.env.DISCORD_TOKEN);
-
 client.on(Events.InteractionCreate, async (interaction) => {
 
-    if (interaction.isChatInputCommand()) {
+  if (interaction.isChatInputCommand()) {
 
-        if (interaction.commandName === "panel") {
+    if (interaction.commandName === "panel") {
 
-            const boton = new ActionRowBuilder().addComponents(
-                new ButtonBuilder()
-                    .setCustomId("verificar")
-                    .setLabel("✅ Verificarme")
-                    .setStyle(ButtonStyle.Success)
-            );
+      const boton = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("verificar")
+          .setLabel("✅ Verificarme")
+          .setStyle(ButtonStyle.Success)
+      );
 
-            await interaction.reply({
-                content: "Pulsa el botón para comenzar tu verificación de Habbo.",
-                components: [boton]
-            });
-
-        }
+      await interaction.reply({
+        content: "Pulsa el botón para comenzar tu verificación de Habbo.",
+        components: [boton]
+      });
 
     }
 
+  }
+
+  if (interaction.isButton()) {
+
+    if (interaction.customId === "verificar") {
+
+      const modal = new ModalBuilder()
+        .setCustomId("modal_verificacion")
+        .setTitle("Verificación Habbo");
+
+      const nombreHabbo = new TextInputBuilder()
+        .setCustomId("nombre_habbo")
+        .setLabel("Tu nombre en Habbo")
+        .setPlaceholder("Ejemplo: NombreHabbo")
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true);
+
+      const fila = new ActionRowBuilder()
+        .addComponents(nombreHabbo);
+
+      modal.addComponents(fila);
+
+      await interaction.showModal(modal);
+
+    }
+
+  }
+
 });
+
+client.login(process.env.DISCORD_TOKEN);
