@@ -71,6 +71,21 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
   }
 
+  if (interaction.isModalSubmit()) {
+
+    if (interaction.customId === "modal_verificacion") {
+
+      const nombre = interaction.fields.getTextInputValue("nombre_habbo");
+
+      await interaction.reply({
+        content: `✅ Recibido. Tu nombre de Habbo es: **${nombre}**`,
+        ephemeral: true
+      });
+
+    }
+
+  }
+
 });
 
 client.login(process.env.DISCORD_TOKEN);
